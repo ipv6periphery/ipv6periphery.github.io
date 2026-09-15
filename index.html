@@ -305,22 +305,21 @@
 
         <div class="tool-card">
             <h5><a href="#ymap">YMap</a></h5>
-            <p class="mb-0 text-muted">Modular IPv6 single-packet scanner implementing the Pruning-as-Scanning strategy.</p>
+            <p class="mb-0 text-muted">A modular Internet IPv6 scanner.</p>
         </div>
         <h4 id="ymap">YMap</h4>
         <p>
-            YMap is a modular IPv6 single-packet scanner written in modern C++.
-            It is designed for Internet-wide IPv6 periphery discovery and supports two scan modes:
+            YMap is a modular IPv6 single-packet scanner written in modern C++ (C++20).
+            It is designed for Internet-wide IPv6 periphery discovery, and is also useful for
+            IPv6 research, security testing, and topology analysis.
         </p>
         <ul>
-            <li><b>net mode</b> &mdash; reads IPv6 prefixes and expands each prefix to a configured depth,
-                generating random probes within the prefix space.</li>
-            <li><b>ip mode</b> &mdash; reads a list of IPv6 addresses and scans them directly.</li>
+            <li>Single-packet scanning</li>
+            <li>Two scan modes: <code>iplist</code> (address list) and <code>prefix</code> (network prefix expansion)</li>
+            <li>Pluggable probe modules</li>
+            <li>Multi-threaded sending with token-bucket rate limiting</li>
+            <li>Real-time monitoring dashboard</li>
         </ul>
-        <p>
-            YMap supports pluggable probe modules (<code>icmp6_echo</code>, <code>udp6_coap</code>,
-            <code>tcp6_syn</code>) and includes multi-threaded sending with rate limiting and real-time monitoring.
-        </p>
         <p>Source: <a href="https://github.com/latteyt/ymap">github.com/latteyt/ymap</a></p>
 
         <!-- ============================================================ -->
