@@ -169,7 +169,6 @@
                     <li class="nav-item"><a class="nav-link" href="#explore">Explore</a></li>
                     <li class="nav-item"><a class="nav-link" href="#service">Service</a></li>
                     <li class="nav-item"><a class="nav-link" href="#tools">Software &amp; Tools</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#paper2025">Paper (INFOCOM 2025)</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
             </div>
@@ -185,7 +184,7 @@
 
         <!-- Hero -->
         <h2 class="topmargin">
-            Towards Internet-Wide IPv6 Network Periphery Discovery
+            <a href="https://ieeexplore.ieee.org/document/11044733">Towards Internet-Wide IPv6 Network Periphery Discovery</a>
         </h2>
         <p class="lead text-muted mt-2">
             On this website we present additional information about our INFOCOM 2025 paper
@@ -323,57 +322,6 @@
             <code>tcp6_syn</code>) and includes multi-threaded sending with rate limiting and real-time monitoring.
         </p>
         <p>Source: <a href="https://github.com/latteyt/ymap">github.com/latteyt/ymap</a></p>
-
-        <!-- ============================================================ -->
-        <h2 id="paper2025">
-            Pruning as Scanning: Towards Internet-Wide IPv6 Network Periphery Discovery
-            <span class="badge-infocom">INFOCOM 2025</span>
-        </h2>
-
-        <div class="abstract-block mt-3">
-            <p>
-                <b>Abstract.</b>
-                IPv6 network periphery devices &mdash; such as last-hop gateways and IoT equipment &mdash;
-                are crucial to understanding the real deployment and security posture of the IPv6 Internet.
-                However, discovering these devices at Internet scale is challenging due to the
-                infeasibility of exhaustive IPv6 address space scanning.
-            </p>
-            <p>
-                In this paper, we propose <em>Pruning as Scanning</em>, a novel scanning strategy
-                that exploits the longest-prefix matching rule to discover IPv6 network periphery
-                devices without requiring any seed addresses.
-                We iteratively probe IPv6 prefixes, pruning unresponsive regions and focusing on densely populated periphery segments.
-                We implement this strategy in YMap, a modular IPv6 single-packet scanner,
-                and conduct Internet-wide experiments demonstrating that our approach can
-                efficiently uncover IPv6 periphery devices across a very large address space
-                with a limited probe budget.
-            </p>
-        </div>
-
-        <p class="mt-3">
-            <b>Paper.</b> Read the final version of our paper:
-            <b><a href="https://ieeexplore.ieee.org/document/11044733">[IEEE Xplore]</a></b>
-        </p>
-
-        <p>
-            <b>Authors.</b>
-            Tao Yang,
-            Ling Hu,
-            Bingnan Hou,
-            Zhenzhong Yang,
-            Zhiping Cai.
-        </p>
-
-        <h4>BibTeX</h4>
-        <pre><code>@inproceedings{yang2025pruning,
-  title     = {{Pruning as Scanning: Towards Internet-Wide IPv6 Network Periphery Discovery}},
-  author    = {Yang, Tao and Hu, Ling and Hou, Bingnan and Yang, Zhenzhong and Cai, Zhiping},
-  booktitle = {Proceedings of the IEEE Conference on Computer Communications},
-  pages     = {1--10},
-  year      = {2025},
-  organization = {IEEE}
-}</code></pre>
-        <p><b><a href="yang2025pruning.bib">[bib]</a></b></p>
 
         <!-- ============================================================ -->
         <h2 id="contact">Contact</h2>
