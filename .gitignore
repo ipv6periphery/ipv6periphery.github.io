@@ -1,3 +1,5 @@
 src/
+data/
 AGENT.md
 AGENTS.md
+clickhouse-ops.md
