@@ -170,7 +170,6 @@
                     <li class="nav-item"><a class="nav-link" href="#service">Service</a></li>
                     <li class="nav-item"><a class="nav-link" href="#tools">Software &amp; Tools</a></li>
                     <li class="nav-item"><a class="nav-link" href="#paper2025">Paper (INFOCOM 2025)</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#reproduc">Reproducibility</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
             </div>
@@ -309,15 +308,6 @@
             <h5><a href="#ymap">YMap</a></h5>
             <p class="mb-0 text-muted">Modular IPv6 single-packet scanner implementing the Pruning-as-Scanning strategy.</p>
         </div>
-        <div class="tool-card">
-            <h5><a href="#pruning-as-scanning">Pruning-as-Scanning</a></h5>
-            <p class="mb-0 text-muted">Helper script to reproduce Internet-wide periphery scans using YMap.</p>
-        </div>
-        <div class="tool-card">
-            <h5><a href="#buniq">buniq</a></h5>
-            <p class="mb-0 text-muted">High-performance deduplication utility based on a blocked Bloom filter.</p>
-        </div>
-
         <h4 id="ymap">YMap</h4>
         <p>
             YMap is a modular IPv6 single-packet scanner written in modern C++.
@@ -333,27 +323,6 @@
             <code>tcp6_syn</code>) and includes multi-threaded sending with rate limiting and real-time monitoring.
         </p>
         <p>Source: <a href="https://github.com/latteyt/ymap">github.com/latteyt/ymap</a></p>
-
-        <h4 id="pruning-as-scanning">Pruning-as-Scanning</h4>
-        <p>
-            The Pruning-as-Scanning approach discovers IPv6 network periphery devices at Internet scale
-            without requiring any seeds. It exploits the fact that
-            <em>packet forwarding still follows the longest-prefix matching rule</em>
-            even in the vast IPv6 address space.
-        </p>
-        <p>
-            The helper script runs a four-round iterative scan, progressively narrowing the address space based on responses from the previous round:
-        </p>
-        <pre><code>bash .pruning-as-scanning/pruning-as-scanning.sh</code></pre>
-        <p>Source: <a href="https://github.com/latteyt/ymap">github.com/latteyt/ymap</a> (bundled in the repository)</p>
-
-        <h4 id="buniq">buniq</h4>
-        <p>
-            buniq is a high-performance IPv6 address deduplication tool based on a blocked Bloom filter.
-            It is designed for large-scale scan outputs where standard tools are too slow.
-        </p>
-        <pre><code>cat lines_to_deduplicate | buniq</code></pre>
-        <p>Source: <a href="https://github.com/latteyt/buniq">github.com/latteyt/buniq</a></p>
 
         <!-- ============================================================ -->
         <h2 id="paper2025">
@@ -405,17 +374,6 @@
   organization = {IEEE}
 }</code></pre>
         <p><b><a href="yang2025pruning.bib">[bib]</a></b></p>
-
-        <!-- ============================================================ -->
-        <h2 id="reproduc">Reproducibility</h2>
-
-        <p>
-            The reproduction script is available as a standalone file:
-            <a href="https://github.com/latteyt/ymap/blob/master/.pruning-as-scanning/pruning-as-scanning.sh">GitHub</a>.
-        </p>
-        <p>
-            It expects <code>DATA_PATH</code> and <code>IF_NAME</code>, and uses the local <code>../build/ymap</code> binary.
-        </p>
 
         <!-- ============================================================ -->
         <h2 id="contact">Contact</h2>
