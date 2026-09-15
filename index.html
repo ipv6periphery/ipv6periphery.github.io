@@ -219,7 +219,7 @@
         </div>
         <p class="stat-updated" id="stat-updated"></p>
 
-        <h4>Sample prefix: <code>2001:4860::/48</code> (Google)</h4>
+        <h4>Sample prefix: <code>2001:4860::/48</code> (Google LLC · AS15169)</h4>
         <p>
             Responsive IPv6 addresses discovered under this prefix. This snapshot is refreshed
             automatically alongside the dataset.
@@ -234,6 +234,22 @@
         <p id="prefix-count" class="mb-2"></p>
         <pre id="prefix-list"><span class="text-muted">Loading&hellip;</span></pre>
         <button type="button" class="btn btn-outline-secondary btn-sm mt-2" id="copy-btn" disabled>Copy all</button>
+
+        <h4>Sample prefix: <code>2605:59c0:6059::/48</code> (SpaceX Starlink · AS14593 · Guatemala City)</h4>
+        <p>
+            Responsive IPv6 addresses discovered under this prefix. This snapshot is refreshed
+            automatically alongside the dataset.
+        </p>
+        <p>Query this prefix directly with <code>curl</code>:</p>
+        <pre><code>curl -sS -m 30 "http://159.195.149.250/query?prefix=2605:59c0:6059::/48"</code></pre>
+        <p>
+            Or open it in your browser:
+            <a href="http://159.195.149.250/query?prefix=2605:59c0:6059::/48">http://159.195.149.250/query?prefix=2605:59c0:6059::/48</a>
+        </p>
+        <p>Result (responsive addresses):</p>
+        <p id="prefix2-count" class="mb-2"></p>
+        <pre id="prefix2-list"><span class="text-muted">Loading&hellip;</span></pre>
+        <button type="button" class="btn btn-outline-secondary btn-sm mt-2" id="copy-btn2" disabled>Copy all</button>
 
         <!-- ============================================================ -->
         <h2 id="service">IPv6 Periphery Service</h2>
@@ -404,8 +420,7 @@
         <!-- ============================================================ -->
         <h2 id="contact">Contact</h2>
         <p>
-            <b>Tao Yang</b> : <b>lattetao</b>@<b>outlook.com</b><br>
-            <b>JiaTang Zhao</b>: <b>zhaojiatang19</b>@<b>nudt.edu.cn</b>
+            <b>Tao Yang</b> : <b>lattetao</b>@<b>outlook.com</b>
         </p>
 
         <footer>
@@ -445,11 +460,11 @@
                     });
             }
 
-            function loadPrefix() {
-                var listEl = document.getElementById('prefix-list');
-                var countEl = document.getElementById('prefix-count');
-                var copyBtn = document.getElementById('copy-btn');
-                fetch('data/prefix-2001-4860.json')
+            function loadPrefix(jsonUrl, countId, listId, copyId) {
+                var listEl = document.getElementById(listId);
+                var countEl = document.getElementById(countId);
+                var copyBtn = document.getElementById(copyId);
+                fetch(jsonUrl)
                     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
                     .then(function (d) {
                         var addrs = d.addresses || [];
@@ -476,7 +491,8 @@
             }
 
             loadCount();
-            loadPrefix();
+            loadPrefix('data/prefix-2001-4860.json', 'prefix-count', 'prefix-list', 'copy-btn');
+            loadPrefix('data/prefix-2605-59c0-6059.json', 'prefix2-count', 'prefix2-list', 'copy-btn2');
         })();
     </script>
 

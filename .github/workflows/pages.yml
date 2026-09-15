@@ -36,6 +36,9 @@ jobs:
           curl -fsSL --retry 3 --retry-delay 5 "http://159.195.149.250/query?prefix=2001:4860::/48" | \
             python3 -c 'import json,sys,datetime; a=[l.strip() for l in sys.stdin if l.strip()]; print(json.dumps({"prefix":"2001:4860::/48","count":len(a),"addresses":a,"updated":datetime.datetime.now(datetime.timezone.utc).isoformat()}))' \
             > data/prefix-2001-4860.json
+          curl -fsSL --retry 3 --retry-delay 5 "http://159.195.149.250/query?prefix=2605:59c0:6059::/48" | \
+            python3 -c 'import json,sys,datetime; a=[l.strip() for l in sys.stdin if l.strip()]; print(json.dumps({"prefix":"2605:59c0:6059::/48","count":len(a),"addresses":a,"updated":datetime.datetime.now(datetime.timezone.utc).isoformat()}))' \
+            > data/prefix-2605-59c0-6059.json
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
