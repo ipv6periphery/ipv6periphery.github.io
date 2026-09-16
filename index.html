@@ -286,7 +286,7 @@
             Or open it in your browser:
             <a href="http://159.195.149.250/query?prefix=2001:4860::/48">http://159.195.149.250/query?prefix=2001:4860::/48</a>
         </p>
-        <p>Result (responsive addresses):</p>
+        <p>Result (address, last seen):</p>
         <p id="prefix-count" class="mb-2"></p>
         <pre id="prefix-list"><span class="text-muted">Loading&hellip;</span></pre>
         <button type="button" class="btn btn-outline-secondary btn-sm mt-2" id="copy-btn" disabled>Copy all</button>
@@ -302,7 +302,7 @@
             Or open it in your browser:
             <a href="http://159.195.149.250/query?prefix=2605:59c0:6059::/48">http://159.195.149.250/query?prefix=2605:59c0:6059::/48</a>
         </p>
-        <p>Result (responsive addresses):</p>
+        <p>Result (address, last seen):</p>
         <p id="prefix2-count" class="mb-2"></p>
         <pre id="prefix2-list"><span class="text-muted">Loading&hellip;</span></pre>
         <button type="button" class="btn btn-outline-secondary btn-sm mt-2" id="copy-btn2" disabled>Copy all</button>
@@ -407,6 +407,12 @@
                 return Number(n).toLocaleString('en-US');
             }
 
+            function fmtTime(ts) {
+                var d = new Date(Number(ts) * 1000);
+                if (isNaN(d.getTime())) return String(ts);
+                return d.toISOString().replace('T', ' ').slice(0, 19);
+            }
+
             function loadCount() {
                 fetch('data/count.json')
                     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
@@ -439,10 +445,13 @@
                             return;
                         }
                         countEl.textContent = 'Responsive addresses: ' + fmt(addrs.length);
-                        listEl.textContent = addrs.join('\n');
+                        var lines = addrs.map(function (e) {
+                            return e.addr + ',' + fmtTime(e.last_seen);
+                        });
+                        listEl.textContent = lines.join('\n');
                         copyBtn.disabled = false;
                         copyBtn.addEventListener('click', function () {
-                            navigator.clipboard.writeText(addrs.join('\n')).then(function () {
+                            navigator.clipboard.writeText(lines.join('\n')).then(function () {
                                 var old = copyBtn.textContent;
                                 copyBtn.textContent = 'Copied!';
                                 setTimeout(function () { copyBtn.textContent = old; }, 1500);
