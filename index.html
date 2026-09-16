@@ -445,6 +445,7 @@
                             return;
                         }
                         countEl.textContent = 'Responsive addresses: ' + fmt(addrs.length);
+                        addrs.sort(function (a, b) { return Number(b.last_seen) - Number(a.last_seen); });
                         var lines = addrs.map(function (e) {
                             return e.addr + ',' + fmtTime(e.last_seen);
                         });
