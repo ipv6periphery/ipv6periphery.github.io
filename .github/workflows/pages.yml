@@ -36,9 +36,9 @@ jobs:
           curl -fsSL --retry 3 --retry-delay 5 "http://159.195.149.250/query?prefix=2001:558:142::/48" | \
             python3 -c 'import json,sys,datetime; e=[{"addr":p[0],"last_seen":p[1]} for p in (l.strip().rsplit(",",1) for l in sys.stdin if l.strip())]; print(json.dumps({"prefix":"2001:558:142::/48","count":len(e),"addresses":e,"updated":datetime.datetime.now(datetime.timezone.utc).isoformat()}))' \
             > data/prefix-2001-558-142.json
-          curl -fsSL --retry 3 --retry-delay 5 "http://159.195.149.250/query?prefix=2605:59c0:6059::/48" | \
-            python3 -c 'import json,sys,datetime; e=[{"addr":p[0],"last_seen":p[1]} for p in (l.strip().rsplit(",",1) for l in sys.stdin if l.strip())]; print(json.dumps({"prefix":"2605:59c0:6059::/48","count":len(e),"addresses":e,"updated":datetime.datetime.now(datetime.timezone.utc).isoformat()}))' \
-            > data/prefix-2605-59c0-6059.json
+          curl -fsSL --retry 3 --retry-delay 5 "http://159.195.149.250/query?prefix=2a0d:3341:b300::/48" | \
+            python3 -c 'import json,sys,datetime; e=[{"addr":p[0],"last_seen":p[1]} for p in (l.strip().rsplit(",",1) for l in sys.stdin if l.strip())]; print(json.dumps({"prefix":"2a0d:3341:b300::/48","count":len(e),"addresses":e,"updated":datetime.datetime.now(datetime.timezone.utc).isoformat()}))' \
+            > data/prefix-2a0d-3341-b300.json
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
