@@ -289,6 +289,7 @@
         <p>Result (address, last seen):</p>
         <p id="prefix-count" class="mb-2"></p>
         <pre id="prefix-list"><span class="text-muted">Loading&hellip;</span></pre>
+        <button type="button" class="btn btn-outline-secondary btn-sm mt-2" id="toggle-btn" style="display:none">Show all</button>
         <button type="button" class="btn btn-outline-secondary btn-sm mt-2" id="copy-btn" disabled>Copy all</button>
 
         <h4>Sample prefix: <code>2a0d:3341:b300::/48</code> (SpaceX Starlink · AS14593 · Berlin)</h4>
@@ -305,6 +306,7 @@
         <p>Result (address, last seen):</p>
         <p id="prefix2-count" class="mb-2"></p>
         <pre id="prefix2-list"><span class="text-muted">Loading&hellip;</span></pre>
+        <button type="button" class="btn btn-outline-secondary btn-sm mt-2" id="toggle-btn2" style="display:none">Show all</button>
         <button type="button" class="btn btn-outline-secondary btn-sm mt-2" id="copy-btn2" disabled>Copy all</button>
 
         <!-- ============================================================ -->
@@ -431,10 +433,14 @@
                     });
             }
 
-            function loadPrefix(jsonUrl, countId, listId, copyId) {
+            function loadPrefix(jsonUrl, countId, listId, copyId, toggleId) {
                 var listEl = document.getElementById(listId);
                 var countEl = document.getElementById(countId);
                 var copyBtn = document.getElementById(copyId);
+                var toggleBtn = document.getElementById(toggleId);
+                var LIMIT = 10;
+                var expanded = false;
+                var allLines = [];
                 fetch(jsonUrl)
                     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
                     .then(function (d) {
@@ -446,13 +452,28 @@
                         }
                         countEl.textContent = 'Responsive addresses: ' + fmt(addrs.length);
                         addrs.sort(function (a, b) { return Number(b.last_seen) - Number(a.last_seen); });
-                        var lines = addrs.map(function (e) {
+                        allLines = addrs.map(function (e) {
                             return e.addr + ',' + fmtTime(e.last_seen);
                         });
-                        listEl.textContent = lines.join('\n');
+                        function render() {
+                            if (allLines.length > LIMIT && !expanded) {
+                                listEl.textContent = allLines.slice(0, LIMIT).join('\n') +
+                                    '\n... (' + (allLines.length - LIMIT) + ' more lines)';
+                                toggleBtn.textContent = 'Show all ' + allLines.length + ' lines';
+                            } else {
+                                listEl.textContent = allLines.join('\n');
+                                toggleBtn.textContent = 'Show less';
+                            }
+                            toggleBtn.style.display = allLines.length > LIMIT ? '' : 'none';
+                        }
+                        render();
                         copyBtn.disabled = false;
+                        toggleBtn.addEventListener('click', function () {
+                            expanded = !expanded;
+                            render();
+                        });
                         copyBtn.addEventListener('click', function () {
-                            navigator.clipboard.writeText(lines.join('\n')).then(function () {
+                            navigator.clipboard.writeText(allLines.join('\n')).then(function () {
                                 var old = copyBtn.textContent;
                                 copyBtn.textContent = 'Copied!';
                                 setTimeout(function () { copyBtn.textContent = old; }, 1500);
@@ -466,8 +487,8 @@
             }
 
             loadCount();
-            loadPrefix('data/prefix-2001-558-142.json', 'prefix-count', 'prefix-list', 'copy-btn');
-            loadPrefix('data/prefix-2a0d-3341-b300.json', 'prefix2-count', 'prefix2-list', 'copy-btn2');
+            loadPrefix('data/prefix-2001-558-142.json', 'prefix-count', 'prefix-list', 'copy-btn', 'toggle-btn');
+            loadPrefix('data/prefix-2a0d-3341-b300.json', 'prefix2-count', 'prefix2-list', 'copy-btn2', 'toggle-btn2');
         })();
     </script>
 
